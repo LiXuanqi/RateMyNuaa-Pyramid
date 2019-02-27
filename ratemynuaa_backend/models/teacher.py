@@ -16,6 +16,6 @@ class Teacher(Base):
 
     courses = relationship("Course", back_populates="teacher")
 
-    college_id = Column(Integer, ForeignKey('college.id'))
+    college_id = Column(Integer, ForeignKey('colleges.id'))
     college = relationship("College", back_populates="teachers")
 

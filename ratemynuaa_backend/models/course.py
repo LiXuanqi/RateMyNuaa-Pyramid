@@ -18,14 +18,15 @@ class CourseType(enum.Enum):
 class Course(Base):
     __tablename__ = 'courses'
     id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
     course_number = Column(String, nullable=False)
     type = Column(Enum(CourseType), nullable=False)
     # - college
-    college_id = Column(Integer, ForeignKey('college.id'))
+    college_id = Column(Integer, ForeignKey('colleges.id'))
     college = relationship("College", back_populates="courses")
     # - teacher
-    teacher_id = Column(Integer, ForeignKey('teacher.id'))
-    teacher = relationship("Teacher", back_populates="teachers")
+    teacher_id = Column(Integer, ForeignKey('teachers.id'))
+    teacher = relationship("Teacher", back_populates="courses")
 
 
 

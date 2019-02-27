@@ -12,9 +12,22 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
-    model = models.mymodel.MyModel(name='one', value=1)
-    dbsession.add(model)
+    college1 = models.college.College(id=1, name='航空宇航学院')
+    college2 = models.college.College(id=2, name='能源与动力学院')
+    college3 = models.college.College(id=3, name='自动化学院')
+    dbsession.add(college1)
+    dbsession.add(college2)
+    dbsession.add(college3)
 
+    teacher1 = models.teacher.Teacher(name='大李', college=college2)
+    teacher2 = models.teacher.Teacher(name='大王', college=college2)
+    dbsession.add(teacher1)
+    dbsession.add(teacher2)
+
+    course1 = models.course.Course(name="航空航天概论", course_number="N32413", type="optional", college=college2, teacher=teacher1)
+    course2 = models.course.Course(name="航空发动机原理", course_number="N32433", type="optional", college=college2, teacher=teacher1)
+    dbsession.add(course1)
+    dbsession.add(course2)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()
