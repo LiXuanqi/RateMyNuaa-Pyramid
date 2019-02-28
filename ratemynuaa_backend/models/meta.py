@@ -14,3 +14,9 @@ NAMING_CONVENTION = {
 
 metadata = MetaData(naming_convention=NAMING_CONVENTION)
 Base = declarative_base(metadata=metadata)
+
+def sqlalchemy_json(self, request):
+    obj_dict = self.__dict__
+    return dict((key, obj_dict[key]) for key in obj_dict if not key.startswith("_"))
+
+Base.__json__ = sqlalchemy_json
