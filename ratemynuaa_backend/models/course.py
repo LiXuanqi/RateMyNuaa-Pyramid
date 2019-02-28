@@ -4,8 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    ForeignKey,
-    Enum
+    ForeignKey
 )
 from sqlalchemy.orm import relationship
 
