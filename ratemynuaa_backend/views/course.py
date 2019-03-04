@@ -5,7 +5,7 @@ from sqlalchemy.orm import joinedload
 
 from .. import models
 
-@view_defaults(route_name='courses')
+@view_defaults(route_name='courses_api')
 class CourseViews:
     def __init__(self, request):
         self.request = request
@@ -29,3 +29,11 @@ class CourseViews:
 
         type = self.request.params['type']
         return self.query.filter_by(type=type).all()
+
+@view_config(route_name="course_api", renderer='json')
+def getCourse(request):
+    course_id = request.matchdict['course_id']
+    return request.dbsession.query(models.Course).options(
+            joinedload(models.Course.teacher),
+            joinedload(models.Course.college
+        )).filter_by(id=course_id).first()
