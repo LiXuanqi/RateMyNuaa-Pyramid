@@ -22,7 +22,8 @@ class Course(Base):
     # - teacher
     teacher_id = Column(Integer, ForeignKey('teachers.id'))
     teacher = relationship("Teacher", back_populates="courses")
-
+    # - comment
+    comments = relationship("Comment", back_populates="course")
 
 
 

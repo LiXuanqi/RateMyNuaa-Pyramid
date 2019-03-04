@@ -1,6 +1,6 @@
 from sqlalchemy import (
     Column,
-    Index,
+    String,
     Integer,
     Text,
     ForeignKey
@@ -18,7 +18,9 @@ class Comment(Base):
     attendance = Column(Integer)
     difficulty = Column(Integer)
     grade = Column(Integer)
-    # - test_type
-    # - course_id
-    # - user_ip
-    # - visible
+    test_type = Column(String)
+    user_ip = Column(String)
+    visible = Column(Integer)
+
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    course = relationship("Course", back_populates="comments")
