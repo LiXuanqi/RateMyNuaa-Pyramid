@@ -12,6 +12,13 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
+    # - drop all datas in table.
+    dbsession.query(models.college.College).delete()
+    dbsession.query(models.teacher.Teacher).delete()
+    dbsession.query(models.course.Course).delete()
+    dbsession.query(models.comment.Comment).delete()
+
+    # - add datas.
     college1 = models.college.College(id=1, name='航空宇航学院')
     college2 = models.college.College(id=2, name='能源与动力学院')
     college3 = models.college.College(id=3, name='自动化学院')
@@ -33,6 +40,33 @@ def setup_models(dbsession):
     dbsession.add(course2)
     dbsession.add(course3)
     dbsession.add(course4)
+
+    comment1 = models.comment.Comment(
+        content="这门课的老师人很好呀.",
+        overall=5,
+        attendance=4,
+        difficulty=3,
+        grade=98,
+        test_type="开卷",
+        user_ip="127.0.0.1",
+        visible=1,
+        course=course1
+    )
+
+    comment2 = models.comment.Comment(
+        content="这门课好难好难，不建议选.",
+        overall=3,
+        attendance=2,
+        difficulty=5,
+        grade=60,
+        test_type="开卷",
+        user_ip="127.0.0.2",
+        visible=1,
+        course=course1
+    )
+
+    dbsession.add(comment1)
+    dbsession.add(comment2)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()

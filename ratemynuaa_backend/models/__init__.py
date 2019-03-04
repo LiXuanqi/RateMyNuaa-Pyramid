@@ -8,6 +8,7 @@ import zope.sqlalchemy
 from .college import College  # flake8: noqa
 from .course import Course
 from .teacher import Teacher
+from .comment import Comment
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
 configure_mappers()
