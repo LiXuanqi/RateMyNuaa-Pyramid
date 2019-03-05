@@ -4,15 +4,18 @@ from sqlalchemy.orm import joinedload
 from .. import models
 
 
-@view_defaults(route_name='comments_api')
+@view_defaults(route_name='comments_api', renderer='json')
 class CommentsViews:
     def __init__(self, request):
         self.request = request
-    @view_config(renderer='json')
+
+    @view_config()
     def getCommentsByCourseId(self):
         courseId = self.request.matchdict.get('course_id')
-        # return self.query.filter(models.Course.college.has(name=college)).all()
         course = self.request.dbsession.query(models.Course).filter_by(id=courseId).first()
         return course.comments
 
+    @view_config(request_method='POST')
+    def addComment(self):
+        pass
 

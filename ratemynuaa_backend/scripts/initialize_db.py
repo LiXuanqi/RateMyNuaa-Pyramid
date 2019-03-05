@@ -31,10 +31,10 @@ def setup_models(dbsession):
     dbsession.add(teacher1)
     dbsession.add(teacher2)
 
-    course1 = models.course.Course(name="航空航天概论", course_number="N32413", type="optional", college=college1, teacher=teacher1)
-    course2 = models.course.Course(name="航空发动机原理", course_number="N32433", type="compulsory", college=college2, teacher=teacher2)
-    course3 = models.course.Course(name="自动控制原理", course_number="N32253", type="compulsory", college=college3, teacher=teacher2)
-    course4 = models.course.Course(name="西方经济学", course_number="N42253", type="optional", college=college2, teacher=teacher1)
+    course1 = models.course.Course(name="航空航天概论", course_number="N32413", type="选修课", college=college1, teacher=teacher1)
+    course2 = models.course.Course(name="航空发动机原理", course_number="N32433", type="必修课", college=college2, teacher=teacher2)
+    course3 = models.course.Course(name="自动控制原理", course_number="N32253", type="必修课", college=college3, teacher=teacher2)
+    course4 = models.course.Course(name="西方经济学", course_number="N42253", type="选修课", college=college2, teacher=teacher1)
 
     dbsession.add(course1)
     dbsession.add(course2)

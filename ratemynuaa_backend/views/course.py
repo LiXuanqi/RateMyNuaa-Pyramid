@@ -29,6 +29,14 @@ class CoursesViews:
         targetType = self.request.params['type']
         return self.query.filter_by(type=targetType).all()
 
+    @view_config(request_method='POST')
+    def addCourse(self):
+        body = self.request.json_body
+        course = models.Course(**body)
+        self.request.dbsession.add(course)
+        self.request.dbsession.flush()
+        self.request.dbsession.refresh(course)
+        return course
 
 @view_defaults(route_name='course_api', renderer='json')
 class CourseViews:
@@ -42,10 +50,6 @@ class CourseViews:
                 joinedload(models.Course.teacher),
                 joinedload(models.Course.college
             )).filter_by(id=courseId).first()
-
-    @view_config(request_method='POST')
-    def addCourse(self):
-        pass
 
     @view_config(request_method='DELETE')
     def deleteCourse(self):
